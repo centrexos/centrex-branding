@@ -1,0 +1,61 @@
+// CentrexOS Plymouth boot splash script
+// Displays animated logo + progress bar during early boot
+
+Window.SetBackgroundTopColor(0.10, 0.11, 0.15);
+Window.SetBackgroundBottomColor(0.09, 0.09, 0.12);
+
+// ─── Logo ──────────────────────────────────────────────────────────────────
+logo.image = Image("logo.png");
+logo.sprite = Sprite(logo.image);
+logo.x = Window.GetWidth()  / 2 - logo.image.GetWidth()  / 2;
+logo.y = Window.GetHeight() / 2 - logo.image.GetHeight() / 2 - 60;
+logo.sprite.SetPosition(logo.x, logo.y, 0);
+logo.sprite.SetOpacity(1);
+
+// ─── Tagline ───────────────────────────────────────────────────────────────
+tagline.image = Image.Text("Engineered for Flexibility and Performance",
+    0.75, 0.79, 0.96, 1,
+    "Noto Sans", 14);
+tagline.sprite = Sprite(tagline.image);
+tagline.x = Window.GetWidth()  / 2 - tagline.image.GetWidth()  / 2;
+tagline.y = logo.y + logo.image.GetHeight() + 18;
+tagline.sprite.SetPosition(tagline.x, tagline.y, 0);
+
+// ─── Progress bar ──────────────────────────────────────────────────────────
+BAR_WIDTH  = 320;
+BAR_HEIGHT = 4;
+BAR_X = Window.GetWidth()  / 2 - BAR_WIDTH  / 2;
+BAR_Y = tagline.y + tagline.image.GetHeight() + 28;
+
+bar_bg.image = Image.new(BAR_WIDTH, BAR_HEIGHT);
+bar_bg.image.Rectangle(0, 0, BAR_WIDTH, BAR_HEIGHT, 0.25, 0.26, 0.36, 1);
+bar_bg.sprite = Sprite(bar_bg.image);
+bar_bg.sprite.SetPosition(BAR_X, BAR_Y, 1);
+
+bar_fg.image   = Image.new(1, BAR_HEIGHT);
+bar_fg.sprite  = Sprite();
+bar_fg.sprite.SetPosition(BAR_X, BAR_Y, 2);
+bar_fg.width   = 0;
+
+fun refresh_callback() {
+    // Smooth animation: grow bar width over time
+    if (bar_fg.width < BAR_WIDTH) {
+        bar_fg.width = bar_fg.width + 2;
+        bar_img = Image.new(bar_fg.width, BAR_HEIGHT);
+        bar_img.Rectangle(0, 0, bar_fg.width, BAR_HEIGHT, 0.48, 0.64, 0.97, 1);
+        bar_fg.sprite.SetImage(bar_img);
+    }
+}
+
+Plymouth.SetRefreshFunction(refresh_callback);
+
+// ─── Password dialog (for encrypted disks) ─────────────────────────────────
+fun show_password_callback(prompt_text, prompt_bullets) {
+    pw_label.image = Image.Text(prompt_text, 0.75, 0.79, 0.96, 1, "Noto Sans", 12);
+    pw_label.sprite = Sprite(pw_label.image);
+    pw_label.sprite.SetPosition(
+        Window.GetWidth()  / 2 - pw_label.image.GetWidth()  / 2,
+        BAR_Y + 24, 3);
+}
+
+Plymouth.SetDisplayPasswordFunction(show_password_callback);

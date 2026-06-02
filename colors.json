@@ -1,0 +1,50 @@
+{
+  "_comment": "CentrexOS brand color palette — based on Tokyo Night",
+
+  "primary": {
+    "blue":   "#7aa2f7",
+    "purple": "#bb9af7",
+    "cyan":   "#2ac3de",
+    "green":  "#9ece6a"
+  },
+
+  "background": {
+    "base":    "#1a1b26",
+    "surface": "#24283b",
+    "overlay": "#1e2030",
+    "subtle":  "#16161e"
+  },
+
+  "foreground": {
+    "text":       "#c0caf5",
+    "muted":      "#a9b1d6",
+    "subtle":     "#9aa5ce",
+    "inactive":   "#565f89"
+  },
+
+  "semantic": {
+    "error":   "#f7768e",
+    "warning": "#e0af68",
+    "success": "#9ece6a",
+    "info":    "#7aa2f7"
+  },
+
+  "terminal": {
+    "black":          "#15161e",
+    "red":            "#f7768e",
+    "green":          "#9ece6a",
+    "yellow":         "#e0af68",
+    "blue":           "#7aa2f7",
+    "magenta":        "#bb9af7",
+    "cyan":           "#7dcfff",
+    "white":          "#a9b1d6",
+    "bright_black":   "#414868",
+    "bright_red":     "#f7768e",
+    "bright_green":   "#9ece6a",
+    "bright_yellow":  "#e0af68",
+    "bright_blue":    "#7aa2f7",
+    "bright_magenta": "#bb9af7",
+    "bright_cyan":    "#7dcfff",
+    "bright_white":   "#c0caf5"
+  }
+}
